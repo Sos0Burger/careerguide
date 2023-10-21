@@ -16,7 +16,12 @@ public class CompanyServiceImpl implements CompanyService {
         return companyRepository.save(
                 new CompanyDAO(
                         null,
-                        rCDTO.getCompanyName()
+                        rCDTO.getCompanyName(),
+                        rCDTO.getAddress(),
+                        rCDTO.getDescription(),
+                        rCDTO.getPhone(),
+                        rCDTO.getEmail(),
+                        null
                 )
         );
     }

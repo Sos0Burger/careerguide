@@ -3,8 +3,10 @@ package com.sosoburger.careerguide.dao;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
-@Table(name = "company")
+@Table(name = "companies")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,4 +20,19 @@ public class CompanyDAO {
 
     @Column(name = "company_name")
     private String companyName;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "Description", columnDefinition = "TEXT")
+    private String description;
+
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "email")
+    private String email;
+
+    @OneToMany(mappedBy = "company")
+    private List<ScheduleDAO> schedule;
 }

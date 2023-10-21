@@ -12,4 +12,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class RequestCompanyDTO {
     private String companyName;
+    private String address;
+    private String description;
+    private String phone;
+    private String email;
 }
