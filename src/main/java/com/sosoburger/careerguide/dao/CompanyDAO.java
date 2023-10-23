@@ -33,6 +33,9 @@ public class CompanyDAO {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "image")
+    private String image;
+
     @OneToMany(mappedBy = "company")
     private List<ScheduleDAO> schedule;
 }

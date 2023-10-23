@@ -11,8 +11,11 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RequestScheduleDTO {
+public class RequestSignUpDTO {
+
+    private String name;
+
+    private String phone;
+
     private Date date;
-    private Integer max;
-    private Integer companyId;
 }

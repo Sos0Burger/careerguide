@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.util.Date;
 
 @Entity
-@Table(name = "schedule")
+@Table(name = "signups")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -32,4 +32,8 @@ public class SignUpDAO {
     @ManyToOne
     @JoinColumn(name="schedule_id", nullable=false)
     private ScheduleDAO schedule;
+
+    @ManyToOne
+    @JoinColumn(name="institution_id", nullable=false)
+    private InstitutionDAO institution;
 }
