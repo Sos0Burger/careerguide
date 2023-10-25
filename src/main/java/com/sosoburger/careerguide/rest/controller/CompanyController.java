@@ -20,7 +20,6 @@ public class CompanyController implements CompanyApi {
     @Override
     public ResponseEntity<ResponseCompanyDTO> createcompany(RequestCompanyDTO request) {
         var company = companyService.save(request);
-        ResponseCompanyDTO response = new ResponseCompanyDTO(company.getCompanyName());
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        return new ResponseEntity<>(company.toDTO(), HttpStatus.CREATED);
     }
 }

@@ -6,6 +6,8 @@ import com.sosoburger.careerguide.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+
 @Service
 public class CompanyServiceImpl implements CompanyService {
     @Autowired
@@ -13,16 +15,10 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public CompanyDAO save(RequestCompanyDTO rCDTO) {
-        return companyRepository.save(
-                new CompanyDAO(
-                        null,
-                        rCDTO.getCompanyName(),
-                        rCDTO.getAddress(),
-                        rCDTO.getDescription(),
-                        rCDTO.getPhone(),
-                        rCDTO.getEmail(),
-                        null
-                )
-        );
+        try {
+            return companyRepository.save(rCDTO.toDAO());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

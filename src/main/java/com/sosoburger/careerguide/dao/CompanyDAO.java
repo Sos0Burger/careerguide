@@ -1,7 +1,9 @@
 package com.sosoburger.careerguide.dao;
 
+import com.sosoburger.careerguide.dto.response.ResponseCompanyDTO;
 import jakarta.persistence.*;
 import lombok.*;
+import org.modelmapper.ModelMapper;
 
 import java.util.List;
 
@@ -12,6 +14,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CompanyDAO {
+
+    @Transient
+    private final ModelMapper modelMapper = new ModelMapper();
 
     @Id
     @Column(name = "company_id")
@@ -38,4 +43,8 @@ public class CompanyDAO {
 
     @OneToMany(mappedBy = "company")
     private List<ScheduleDAO> schedule;
+
+    public ResponseCompanyDTO toDTO(){
+        return modelMapper.map(this, ResponseCompanyDTO.class);
+    }
 }
