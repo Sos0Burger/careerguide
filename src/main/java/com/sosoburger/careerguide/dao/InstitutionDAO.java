@@ -1,10 +1,12 @@
 package com.sosoburger.careerguide.dao;
 
+import com.sosoburger.careerguide.dto.response.ResponseInstitutionDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.modelmapper.ModelMapper;
 
 import java.util.List;
 
@@ -15,6 +17,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class InstitutionDAO {
+    @Transient
+    private final ModelMapper modelMapper = new ModelMapper();
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,4 +32,7 @@ public class InstitutionDAO {
 
     @OneToMany(mappedBy = "institution")
     private List<SignUpDAO> signUps;
+    public ResponseInstitutionDTO toDTO(){
+        return modelMapper.map(this, ResponseInstitutionDTO.class);
+    }
 }

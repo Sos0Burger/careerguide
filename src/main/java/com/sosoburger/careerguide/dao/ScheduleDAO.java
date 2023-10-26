@@ -1,10 +1,13 @@
 package com.sosoburger.careerguide.dao;
 
+import com.sosoburger.careerguide.dto.request.RequestScheduleDTO;
+import com.sosoburger.careerguide.dto.response.ResponseInstitutionDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.modelmapper.ModelMapper;
 
 import java.util.Date;
 import java.util.List;
@@ -16,6 +19,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ScheduleDAO {
+
+    @Transient
+    private final ModelMapper modelMapper = new ModelMapper();
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

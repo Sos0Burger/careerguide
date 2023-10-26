@@ -22,4 +22,22 @@ public class CompanyController implements CompanyApi {
         var company = companyService.save(request);
         return new ResponseEntity<>(company.toDTO(), HttpStatus.CREATED);
     }
+
+    @Override
+    public ResponseEntity<ResponseCompanyDTO> updatecompany(Integer id ,RequestCompanyDTO request) {
+        var company = companyService.update(id, request);
+        return new ResponseEntity<>(company.toDTO(), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<ResponseCompanyDTO> getcompany(Integer id) {
+        var company = companyService.get(id);
+        return new ResponseEntity<>(company.toDTO(), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> delete(Integer id) {
+        companyService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

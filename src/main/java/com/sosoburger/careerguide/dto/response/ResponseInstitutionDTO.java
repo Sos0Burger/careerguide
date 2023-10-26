@@ -19,6 +19,5 @@ public class ResponseInstitutionDTO {
 
     private String image;
 
-    private List<SignUpDAO> signUps;
 
 }
