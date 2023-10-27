@@ -1,7 +1,6 @@
 package com.sosoburger.careerguide.rest.controller;
 
 import com.sosoburger.careerguide.dto.request.RequestInstitutionDTO;
-import com.sosoburger.careerguide.dto.response.ResponseCompanyDTO;
 import com.sosoburger.careerguide.dto.response.ResponseInstitutionDTO;
 import com.sosoburger.careerguide.rest.api.InstitutionApi;
 import com.sosoburger.careerguide.service.institution.InstitutionService;
@@ -20,25 +19,25 @@ public class InstitutionController implements InstitutionApi {
     }
 
     @Override
-    public ResponseEntity<ResponseInstitutionDTO> createinstitution(RequestInstitutionDTO request) {
+    public ResponseEntity<ResponseInstitutionDTO> createInstitution(RequestInstitutionDTO request) {
         var institution = institutionService.save(request);
         return new ResponseEntity<>(institution.toDTO(), HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<ResponseInstitutionDTO> updateinstitution(Integer id, RequestInstitutionDTO request) {
+    public ResponseEntity<ResponseInstitutionDTO> updateInstitution(Integer id, RequestInstitutionDTO request) {
         var institution = institutionService.update(id, request);
         return new ResponseEntity<>(institution.toDTO(), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<ResponseInstitutionDTO> getinstitution(Integer id) {
+    public ResponseEntity<ResponseInstitutionDTO> getInstitution(Integer id) {
         var institution = institutionService.get(id);
         return new ResponseEntity<>(institution.toDTO(), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<?> deleteinstitution(Integer id) {
+    public ResponseEntity<?> deleteInstitution(Integer id) {
         institutionService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

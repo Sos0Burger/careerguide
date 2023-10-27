@@ -18,19 +18,19 @@ public class CompanyController implements CompanyApi {
         this.companyService = companyService;
     }
     @Override
-    public ResponseEntity<ResponseCompanyDTO> createcompany(RequestCompanyDTO request) {
+    public ResponseEntity<ResponseCompanyDTO> createCompany(RequestCompanyDTO request) {
         var company = companyService.save(request);
         return new ResponseEntity<>(company.toDTO(), HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<ResponseCompanyDTO> updatecompany(Integer id ,RequestCompanyDTO request) {
+    public ResponseEntity<ResponseCompanyDTO> updateCompany(Integer id ,RequestCompanyDTO request) {
         var company = companyService.update(id, request);
         return new ResponseEntity<>(company.toDTO(), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<ResponseCompanyDTO> getcompany(Integer id) {
+    public ResponseEntity<ResponseCompanyDTO> getCompany(Integer id) {
         var company = companyService.get(id);
         return new ResponseEntity<>(company.toDTO(), HttpStatus.OK);
     }

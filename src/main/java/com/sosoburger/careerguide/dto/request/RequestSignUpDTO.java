@@ -1,6 +1,5 @@
 package com.sosoburger.careerguide.dto.request;
 
-import com.sosoburger.careerguide.dao.ScheduleDAO;
 import com.sosoburger.careerguide.dao.SignUpDAO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
