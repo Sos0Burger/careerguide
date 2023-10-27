@@ -1,5 +1,6 @@
 package com.sosoburger.careerguide.dao;
 
+import com.sosoburger.careerguide.dto.response.ResponseSignUpDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -40,4 +41,8 @@ public class SignUpDAO {
     @ManyToOne
     @JoinColumn(name="institution_id", nullable=false)
     private InstitutionDAO institution;
+
+    public ResponseSignUpDTO toDTO(){
+        return modelMapper.map(this, ResponseSignUpDTO.class);
+    }
 }

@@ -12,15 +12,15 @@ public interface CompanyApi {
 
     @PostMapping
     @Operation(description = "Создание компании")
-    ResponseEntity<ResponseCompanyDTO> createcompany(@RequestBody RequestCompanyDTO request);
+    ResponseEntity<ResponseCompanyDTO> createCompany(@RequestBody RequestCompanyDTO request);
 
     @PutMapping("/{id}")
     @Operation(description = "Обновление компании")
-    ResponseEntity<ResponseCompanyDTO> updatecompany(@PathVariable("id") Integer id, @RequestBody RequestCompanyDTO request);
+    ResponseEntity<ResponseCompanyDTO> updateCompany(@PathVariable("id") Integer id, @RequestBody RequestCompanyDTO request);
 
     @GetMapping("/{id}")
     @Operation(description = "Получение компании")
-    ResponseEntity<ResponseCompanyDTO> getcompany(@PathVariable("id") Integer id);
+    ResponseEntity<ResponseCompanyDTO> getCompany(@PathVariable("id") Integer id);
 
     @DeleteMapping("/{id}")
     @Operation(description = "Удаление компании")

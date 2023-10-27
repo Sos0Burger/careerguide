@@ -1,21 +1,22 @@
 package com.sosoburger.careerguide.service.institution;
 
-import com.sosoburger.careerguide.dao.CompanyDAO;
+
 import com.sosoburger.careerguide.dao.InstitutionDAO;
 import com.sosoburger.careerguide.dto.request.RequestInstitutionDTO;
 import com.sosoburger.careerguide.exception.NotFoundException;
-import com.sosoburger.careerguide.repository.CompanyRepository;
 import com.sosoburger.careerguide.repository.InstitutionRepository;
-import com.sosoburger.careerguide.service.institution.InstitutionService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 
 @Service
 public class InstitutionServiceImpl implements InstitutionService {
-    @Autowired
-    private InstitutionRepository institutionRepository;
+    private final InstitutionRepository institutionRepository;
+
+    public InstitutionServiceImpl(InstitutionRepository institutionRepository) {
+        this.institutionRepository = institutionRepository;
+    }
+
     @Override
     public InstitutionDAO save(RequestInstitutionDTO institutionDTO) {
         try {
@@ -40,7 +41,7 @@ public class InstitutionServiceImpl implements InstitutionService {
 
     @Override
     public InstitutionDAO get(Integer id) {
-        String notFound = String.format("Пользователь %d не найден.", id);
+        String notFound = String.format("Учебное заведение %d не найден.", id);
         if (institutionRepository.findById(id).isEmpty()) {
             throw new NotFoundException(notFound);
         } else {
