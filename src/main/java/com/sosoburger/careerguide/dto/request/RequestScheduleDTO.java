@@ -16,7 +16,6 @@ import java.util.Date;
 @NoArgsConstructor
 public class RequestScheduleDTO {
     private Date date;
-    private Integer max;
     private Integer companyId;
     public ScheduleDAO toDAO() throws ParseException {
         ModelMapper modelMapper = new ModelMapper();

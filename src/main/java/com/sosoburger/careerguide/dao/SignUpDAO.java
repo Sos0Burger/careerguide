@@ -23,7 +23,7 @@ public class SignUpDAO {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer signUpId;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -34,15 +34,22 @@ public class SignUpDAO {
     @Column(name = "signup_date")
     private Date date;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="schedule_id", nullable=false)
     private ScheduleDAO schedule;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="institution_id", nullable=false)
     private InstitutionDAO institution;
 
     public ResponseSignUpDTO toDTO(){
-        return modelMapper.map(this, ResponseSignUpDTO.class);
+        return new ResponseSignUpDTO(
+                signUpId,
+                name,
+                phone,
+                date,
+                schedule.getId(),
+                institution.getId()
+        );
     }
 }

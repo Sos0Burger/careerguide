@@ -1,9 +1,14 @@
 package com.sosoburger.careerguide.service.signup;
 
+import com.sosoburger.careerguide.dao.ScheduleDAO;
 import com.sosoburger.careerguide.dao.SignUpDAO;
 import com.sosoburger.careerguide.dto.request.RequestSignUpDTO;
 import com.sosoburger.careerguide.exception.NotFoundException;
+import com.sosoburger.careerguide.repository.InstitutionRepository;
+import com.sosoburger.careerguide.repository.ScheduleRepository;
 import com.sosoburger.careerguide.repository.SignUpRepository;
+import com.sosoburger.careerguide.service.institution.InstitutionService;
+import com.sosoburger.careerguide.service.schedule.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +19,19 @@ public class SignUpServiceImpl implements SignUpService {
 
     @Autowired
     private SignUpRepository signUpRepository;
+    @Autowired
+    private ScheduleService scheduleService;
+    @Autowired
+    private InstitutionService institutionService;
     @Override
     public SignUpDAO save(RequestSignUpDTO signUpDTO) {
+
         try {
             return signUpRepository.save(signUpDTO.toDAO());
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     @Override
@@ -28,7 +39,7 @@ public class SignUpServiceImpl implements SignUpService {
         SignUpDAO savedSignUp = get(id);
         try {
             SignUpDAO SignUpDAO = signUpDTO.toDAO();
-            SignUpDAO.setId(savedSignUp.getId());
+            SignUpDAO.setSignUpId(savedSignUp.getSignUpId());
             SignUpDAO.setSchedule(savedSignUp.getSchedule());
             return signUpRepository.save(SignUpDAO);
         } catch (ParseException e) {
@@ -38,7 +49,7 @@ public class SignUpServiceImpl implements SignUpService {
 
     @Override
     public SignUpDAO get(Integer id) {
-        String notFound = String.format("Пользователь %d не найден.", id);
+        String notFound = String.format("Заявка %d не найдена.", id);
         if (signUpRepository.findById(id).isEmpty()) {
             throw new NotFoundException(notFound);
         } else {

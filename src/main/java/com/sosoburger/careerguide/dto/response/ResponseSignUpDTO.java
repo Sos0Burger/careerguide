@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResponseSignUpDTO {
-    private Integer id;
+    private Integer SignUpId;
 
     private String name;
 
@@ -22,7 +22,7 @@ public class ResponseSignUpDTO {
 
     private Date date;
 
-    private ScheduleDAO schedule;
+    private Integer scheduleId;
 
-    private Integer institution;
+    private Integer institutionId;
 }

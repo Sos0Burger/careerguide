@@ -15,8 +15,6 @@ import java.text.ParseException;
 @AllArgsConstructor
 public class RequestInstitutionDTO {
 
-    private Integer id;
-
     private String name;
 
     private String image;

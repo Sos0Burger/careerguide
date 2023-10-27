@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("SignUp")
+@RequestMapping("/signup")
 public interface SignUpApi {
     @PostMapping
     @Operation(description = "Создание заявки")
