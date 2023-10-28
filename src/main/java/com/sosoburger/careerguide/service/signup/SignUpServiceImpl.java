@@ -1,11 +1,8 @@
 package com.sosoburger.careerguide.service.signup;
 
-import com.sosoburger.careerguide.dao.ScheduleDAO;
 import com.sosoburger.careerguide.dao.SignUpDAO;
 import com.sosoburger.careerguide.dto.request.RequestSignUpDTO;
 import com.sosoburger.careerguide.exception.NotFoundException;
-import com.sosoburger.careerguide.repository.InstitutionRepository;
-import com.sosoburger.careerguide.repository.ScheduleRepository;
 import com.sosoburger.careerguide.repository.SignUpRepository;
 import com.sosoburger.careerguide.service.institution.InstitutionService;
 import com.sosoburger.careerguide.service.schedule.ScheduleService;
@@ -25,9 +22,11 @@ public class SignUpServiceImpl implements SignUpService {
     private InstitutionService institutionService;
     @Override
     public SignUpDAO save(RequestSignUpDTO signUpDTO) {
-
         try {
-            return signUpRepository.save(signUpDTO.toDAO());
+            SignUpDAO signUpDAO = signUpDTO.toDAO();
+            signUpDAO.setSchedule(scheduleService.get(signUpDTO.getSchedule()));
+            signUpDAO.setInstitution(institutionService.get(signUpDTO.getInstitution()));
+            return signUpRepository.save(signUpDAO);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -38,10 +37,11 @@ public class SignUpServiceImpl implements SignUpService {
     public SignUpDAO update(Integer id, RequestSignUpDTO signUpDTO) {
         SignUpDAO savedSignUp = get(id);
         try {
-            SignUpDAO SignUpDAO = signUpDTO.toDAO();
-            SignUpDAO.setSignUpId(savedSignUp.getSignUpId());
-            SignUpDAO.setSchedule(savedSignUp.getSchedule());
-            return signUpRepository.save(SignUpDAO);
+            SignUpDAO signUpDAO = signUpDTO.toDAO();
+            signUpDAO.setSignUpId(savedSignUp.getSignUpId());
+            signUpDAO.setSchedule(savedSignUp.getSchedule());
+            signUpDAO.setInstitution(savedSignUp.getInstitution());
+            return signUpRepository.save(signUpDAO);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
