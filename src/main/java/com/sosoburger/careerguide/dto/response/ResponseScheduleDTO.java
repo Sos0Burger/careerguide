@@ -1,23 +1,24 @@
 package com.sosoburger.careerguide.dto.response;
 
+import com.sosoburger.careerguide.dao.CompanyDAO;
 import com.sosoburger.careerguide.dao.SignUpDAO;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResponseInstitutionDTO {
+public class ResponseScheduleDTO {
     private Integer id;
 
-    private String name;
+    private Date date;
 
-    private String image;
-
-
+    private Integer scheduleId;
 }

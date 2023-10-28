@@ -4,7 +4,6 @@ import com.sosoburger.careerguide.dto.response.ResponseCompanyDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import org.modelmapper.ModelMapper;
-
 import java.util.List;
 
 @Entity
