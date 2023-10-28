@@ -23,4 +23,5 @@ public interface ScheduleApi {
     @DeleteMapping("/{id}")
     @Operation(description = "Удаление расписания")
     ResponseEntity<?> deleteInstitution(@PathVariable("id") Integer id);
+
 }

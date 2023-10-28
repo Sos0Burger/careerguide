@@ -1,21 +1,23 @@
 package com.sosoburger.careerguide.service.company;
 
 import com.sosoburger.careerguide.dao.CompanyDAO;
+import com.sosoburger.careerguide.dao.ScheduleDAO;
 import com.sosoburger.careerguide.dto.request.RequestCompanyDTO;
 import com.sosoburger.careerguide.exception.NotFoundException;
 import com.sosoburger.careerguide.repository.CompanyRepository;
+import com.sosoburger.careerguide.repository.ScheduleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
+import java.util.List;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
-    private final CompanyRepository companyRepository;
-
-    public CompanyServiceImpl(CompanyRepository companyRepository) {
-        this.companyRepository = companyRepository;
-    }
-
+    @Autowired
+    private CompanyRepository companyRepository;
+    @Autowired
+    private ScheduleRepository scheduleRepository;
     @Override
     public CompanyDAO save(RequestCompanyDTO companyDTO) {
         try {
@@ -56,5 +58,10 @@ public class CompanyServiceImpl implements CompanyService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public List<ScheduleDAO> getSchedule(Integer id) {
+        return scheduleRepository.findByCompany(id);
     }
 }
