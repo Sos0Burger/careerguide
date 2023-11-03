@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface UserApi {
     @PostMapping("/signin")
     ResponseEntity<String> authenticateUser(@RequestBody LoginDTO loginDto);
-
     @PostMapping("/signup")
     ResponseEntity<?> registerUser(@RequestBody RegDTO RegDTO);
 }

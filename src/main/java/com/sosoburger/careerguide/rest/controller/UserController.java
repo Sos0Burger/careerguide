@@ -4,6 +4,7 @@ import com.sosoburger.careerguide.dao.RoleDAO;
 import com.sosoburger.careerguide.dao.UserDAO;
 import com.sosoburger.careerguide.dto.request.LoginDTO;
 import com.sosoburger.careerguide.dto.request.RegDTO;
+import com.sosoburger.careerguide.exception.NotFoundException;
 import com.sosoburger.careerguide.repository.RoleRepository;
 import com.sosoburger.careerguide.repository.UserRepository;
 import com.sosoburger.careerguide.rest.api.UserApi;
@@ -36,29 +37,31 @@ public class UserController implements UserApi {
     @Override
     public ResponseEntity<String> authenticateUser(LoginDTO loginDto) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginDto.getEmail(), loginDto.getPassword()));
+                loginDto.getLogin(), loginDto.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new ResponseEntity<>("User signed-in successfully!.", HttpStatus.OK);
     }
-
     @Override
-    public ResponseEntity<?> registerUser(RegDTO RegDTO) {
+    public ResponseEntity<?> registerUser(RegDTO regDTO) {
         // add check for email exists in DB
-        if(userRepository.existsByEmail(RegDTO.getEmail())){
-            return new ResponseEntity<>("Email is already taken!", HttpStatus.BAD_REQUEST);
+        if(userRepository.existsByLogin(regDTO.getLogin())){
+            return new ResponseEntity<>("Логин уже занят!", HttpStatus.BAD_REQUEST);
         }
 
         // create user object
         UserDAO user = new UserDAO();
-        user.setEmail(RegDTO.getEmail());
-        user.setPassword(passwordEncoder.encode(RegDTO.getPassword()));
+        user.setLogin(regDTO.getLogin());
+        user.setPassword(passwordEncoder.encode(regDTO.getPassword()));
 
-        RoleDAO roles = roleRepository.findByName("ROLE_USER").get();
+        if(roleRepository.findByName("ROLE_"+regDTO.getRole()).isEmpty()){
+            throw new NotFoundException("Такой роли не существует");
+        };
+        RoleDAO roles = roleRepository.findByName("ROLE_"+regDTO.getRole()).get();
         user.setRoles(Collections.singleton(roles));
 
         userRepository.save(user);
 
-        return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
+        return new ResponseEntity<>("Пользователь успешно зарегестрирован", HttpStatus.OK);
     }
 }

@@ -4,9 +4,11 @@ import com.sosoburger.careerguide.dto.request.RequestInstitutionDTO;
 import com.sosoburger.careerguide.dto.response.ResponseInstitutionDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/institution")
+@PreAuthorize("hasRole('INSTITUTION')")
 public interface InstitutionApi {
     @PostMapping
     @Operation(description = "Создание учебного заведения")

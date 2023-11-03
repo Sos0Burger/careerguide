@@ -8,15 +8,15 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "users", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"email"})
+        @UniqueConstraint(columnNames = {"login"})
 })
 public class UserDAO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "email")
-    private String email;
+    @Column(name = "login")
+    private String login;
     @Column(name = "password")
     private String password;
 

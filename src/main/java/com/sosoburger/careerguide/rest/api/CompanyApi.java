@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequestMapping("/company")
-@PreAuthorize("hasRole('USER')")
+@PreAuthorize("hasRole('COMPANY')")
 public interface CompanyApi {
 
     @PostMapping

@@ -3,6 +3,7 @@ package com.sosoburger.careerguide.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -37,12 +38,10 @@ public class SecurityConfig{
 
         http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/user/*").permitAll()
+                .requestMatchers("/user/**", "swagger-ui/**", "api/v1/**").permitAll()
                     .anyRequest().authenticated()
                 .and()
-                    .formLogin()
-                .permitAll();
-
+                .httpBasic(Customizer.withDefaults());
         return http.build();
     }
 }
