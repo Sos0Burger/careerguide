@@ -4,6 +4,7 @@ package com.sosoburger.careerguide.rest.api;
 import com.sosoburger.careerguide.dto.request.RequestCompanyDTO;
 import com.sosoburger.careerguide.dto.response.ResponseCompanyDTO;
 import com.sosoburger.careerguide.dto.response.ResponseScheduleDTO;
+import com.sosoburger.careerguide.dto.response.ResponseSignUpDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -35,4 +36,12 @@ public interface CompanyApi {
     @GetMapping("/{id}/schedule")
     @Operation(summary = "Расписание комании")
     ResponseEntity<List<ResponseScheduleDTO>> getSchedule(@PathVariable("id") Integer id);
+
+    @GetMapping("/{id}/signup-status")
+    @Operation(summary = "Заявки компании, которые ещё не одобрили/отклонили")
+    ResponseEntity<List<ResponseSignUpDTO>> getPendingSignUps(@PathVariable("id") Integer id);
+
+    @GetMapping("/{id}/signup-archive")
+    @Operation(summary = "Заявки компании, которые уже были одобрены/отклонены")
+    ResponseEntity<List<ResponseSignUpDTO>> getSignUpsArchive(@PathVariable("id") Integer id);
 }

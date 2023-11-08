@@ -38,18 +38,18 @@ public class SignUpDAO {
     private Boolean status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="schedule_id", nullable=false)
+    @JoinColumn(name = "schedule_id", nullable = false)
     private ScheduleDAO schedule;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="institution_id", nullable=false)
+    @JoinColumn(name = "institution_id", nullable = false)
     private InstitutionDAO institution;
 
     @OneToOne
     @JoinColumn(name = "file_id")
     private FileDAO file;
 
-    public ResponseSignUpDTO toDTO(){
+    public ResponseSignUpDTO toDTO() {
         return new ResponseSignUpDTO(
                 signUpId,
                 name,
@@ -58,7 +58,9 @@ public class SignUpDAO {
                 status,
                 schedule.getId(),
                 institution.getId(),
-                file.getId()
+                file == null ?
+                        null :
+                        file.getId()
         );
     }
 }
