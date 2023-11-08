@@ -20,5 +20,5 @@ public class ResponseScheduleDTO {
 
     private Date date;
 
-    private Integer scheduleId;
+    private Integer companyId;
 }

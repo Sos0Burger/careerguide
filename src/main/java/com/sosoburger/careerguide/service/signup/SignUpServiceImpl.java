@@ -4,6 +4,7 @@ import com.sosoburger.careerguide.dao.SignUpDAO;
 import com.sosoburger.careerguide.dto.request.RequestSignUpDTO;
 import com.sosoburger.careerguide.exception.NotFoundException;
 import com.sosoburger.careerguide.repository.SignUpRepository;
+import com.sosoburger.careerguide.service.file.FileService;
 import com.sosoburger.careerguide.service.institution.InstitutionService;
 import com.sosoburger.careerguide.service.schedule.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class SignUpServiceImpl implements SignUpService {
     private ScheduleService scheduleService;
     @Autowired
     private InstitutionService institutionService;
+    @Autowired
+    private FileService fileService;
     @Override
     public SignUpDAO save(RequestSignUpDTO signUpDTO) {
         try {
@@ -27,6 +30,8 @@ public class SignUpServiceImpl implements SignUpService {
             signUpDAO.setSchedule(scheduleService.get(signUpDTO.getSchedule()));
             signUpDAO.setInstitution(institutionService.get(signUpDTO.getInstitution()));
             signUpDAO.setStatus(null);
+            signUpDAO.setFile(fileService.get(signUpDTO.getFile()));
+
             return signUpRepository.save(signUpDAO);
         } catch (ParseException e) {
             throw new RuntimeException(e);

@@ -28,11 +28,14 @@ public class RequestSignUpDTO {
 
     private Integer institution;
 
+    private Integer file;
+
     public SignUpDAO toDAO() throws ParseException {
         modelMapper.typeMap(RequestSignUpDTO.class, SignUpDAO.class).addMappings(mapper ->{
             mapper.skip(SignUpDAO::setSignUpId);
             mapper.skip(SignUpDAO::setInstitution);
             mapper.skip(SignUpDAO::setStatus);
+            mapper.skip(SignUpDAO::setFile);
         });
         return modelMapper.map(this, SignUpDAO.class);
     }

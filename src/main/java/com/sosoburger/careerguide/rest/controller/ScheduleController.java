@@ -19,25 +19,25 @@ public class ScheduleController implements ScheduleApi {
     }
 
     @Override
-    public ResponseEntity<ResponseScheduleDTO> createInstitution(RequestScheduleDTO request) {
+    public ResponseEntity<ResponseScheduleDTO> createSchedule(RequestScheduleDTO request) {
         var schedule = scheduleService.save(request);
         return new ResponseEntity<>(schedule.toDTO(), HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<ResponseScheduleDTO> updateInstitution(Integer id, RequestScheduleDTO request) {
+    public ResponseEntity<ResponseScheduleDTO> updateSchedule(Integer id, RequestScheduleDTO request) {
         var schedule = scheduleService.update(id, request);
         return new ResponseEntity<>(schedule.toDTO(), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<ResponseScheduleDTO> getInstitution(Integer id) {
+    public ResponseEntity<ResponseScheduleDTO> getSchedule(Integer id) {
         var schedule = scheduleService.get(id);
         return new ResponseEntity<>(schedule.toDTO(), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<?> deleteInstitution(Integer id) {
+    public ResponseEntity<?> deleteSchedule(Integer id) {
         scheduleService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

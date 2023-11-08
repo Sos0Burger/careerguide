@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.*;
 public interface ScheduleApi {
     @PostMapping
     @Operation(description = "Создание расписание")
-    ResponseEntity<ResponseScheduleDTO> createInstitution(@RequestBody RequestScheduleDTO request);
+    ResponseEntity<ResponseScheduleDTO> createSchedule(@RequestBody RequestScheduleDTO request);
 
     @PutMapping("/{id}")
     @Operation(description = "Обновление расписания")
-    ResponseEntity<ResponseScheduleDTO> updateInstitution(@PathVariable("id") Integer id, @RequestBody RequestScheduleDTO request);
+    ResponseEntity<ResponseScheduleDTO> updateSchedule(@PathVariable("id") Integer id, @RequestBody RequestScheduleDTO request);
 
     @GetMapping("/{id}")
     @Operation(description = "Получение расписания")
-    ResponseEntity<ResponseScheduleDTO> getInstitution(@PathVariable("id") Integer id);
+    ResponseEntity<ResponseScheduleDTO> getSchedule(@PathVariable("id") Integer id);
 
     @DeleteMapping("/{id}")
     @Operation(description = "Удаление расписания")
-    ResponseEntity<?> deleteInstitution(@PathVariable("id") Integer id);
+    ResponseEntity<?> deleteSchedule(@PathVariable("id") Integer id);
 
 }
