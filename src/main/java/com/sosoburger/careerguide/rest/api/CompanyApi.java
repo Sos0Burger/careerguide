@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequestMapping("/company")
-@PreAuthorize("hasRole('COMPANY')")
 public interface CompanyApi {
 
+    @PreAuthorize("hasRole('COMPANY')")
     @PostMapping
     @Operation(description = "Создание компании")
     ResponseEntity<ResponseCompanyDTO> createCompany(@RequestBody RequestCompanyDTO request);
 
+    @PreAuthorize("hasRole('COMPANY')")
     @PutMapping("/{id}")
     @Operation(description = "Обновление компании")
     ResponseEntity<ResponseCompanyDTO> updateCompany(@PathVariable("id") Integer id, @RequestBody RequestCompanyDTO request);
@@ -26,7 +27,7 @@ public interface CompanyApi {
     @GetMapping("/{id}")
     @Operation(description = "Получение компании")
     ResponseEntity<ResponseCompanyDTO> getCompany(@PathVariable("id") Integer id);
-
+    @PreAuthorize("hasRole('COMPANY')")
     @DeleteMapping("/{id}")
     @Operation(description = "Удаление компании")
     ResponseEntity<?> delete(@PathVariable("id") Integer id);

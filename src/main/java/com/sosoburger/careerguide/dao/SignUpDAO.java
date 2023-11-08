@@ -34,6 +34,9 @@ public class SignUpDAO {
     @Column(name = "signup_date")
     private Date date;
 
+    @Column(name = "status")
+    private Boolean status;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="schedule_id", nullable=false)
     private ScheduleDAO schedule;
@@ -42,14 +45,20 @@ public class SignUpDAO {
     @JoinColumn(name="institution_id", nullable=false)
     private InstitutionDAO institution;
 
+    @OneToOne
+    @JoinColumn(name = "file_id")
+    private FileDAO file;
+
     public ResponseSignUpDTO toDTO(){
         return new ResponseSignUpDTO(
                 signUpId,
                 name,
                 phone,
                 date,
+                status,
                 schedule.getId(),
-                institution.getId()
+                institution.getId(),
+                file.getId()
         );
     }
 }

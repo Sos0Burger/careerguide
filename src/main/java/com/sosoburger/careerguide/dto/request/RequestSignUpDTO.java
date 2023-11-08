@@ -32,6 +32,7 @@ public class RequestSignUpDTO {
         modelMapper.typeMap(RequestSignUpDTO.class, SignUpDAO.class).addMappings(mapper ->{
             mapper.skip(SignUpDAO::setSignUpId);
             mapper.skip(SignUpDAO::setInstitution);
+            mapper.skip(SignUpDAO::setStatus);
         });
         return modelMapper.map(this, SignUpDAO.class);
     }

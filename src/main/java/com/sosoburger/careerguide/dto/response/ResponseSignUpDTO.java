@@ -1,7 +1,6 @@
 package com.sosoburger.careerguide.dto.response;
 
 
-import com.sosoburger.careerguide.dao.ScheduleDAO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +21,11 @@ public class ResponseSignUpDTO {
 
     private Date date;
 
+    private Boolean status;
+
     private Integer scheduleId;
 
     private Integer institutionId;
+
+    private Integer file;
 }

@@ -8,4 +8,6 @@ public interface SignUpService {
     SignUpDAO update (Integer id, RequestSignUpDTO signUpDTO);
     SignUpDAO get (Integer id);
     void delete(Integer id);
+
+    void changeStatus(Integer id, Boolean status);
 }

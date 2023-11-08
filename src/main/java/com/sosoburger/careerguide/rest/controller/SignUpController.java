@@ -39,4 +39,10 @@ public class SignUpController implements SignUpApi {
         signUpService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<?> changeSignUpStatus(Integer id, Boolean status) {
+        signUpService.changeStatus(id, status);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

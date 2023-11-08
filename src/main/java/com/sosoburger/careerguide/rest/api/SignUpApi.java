@@ -8,21 +8,29 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/signup")
-@PreAuthorize("hasRole('INSTITUTION')")
 public interface SignUpApi {
+    @PreAuthorize("hasRole('INSTITUTION')")
     @PostMapping
     @Operation(description = "Создание заявки")
     ResponseEntity<ResponseSignUpDTO> createSignUp(@RequestBody RequestSignUpDTO request);
 
+    @PreAuthorize("hasRole('INSTITUTION')")
     @PutMapping("/{id}")
     @Operation(description = "Обновление заявки")
     ResponseEntity<ResponseSignUpDTO> updateSignUp(@PathVariable("id") Integer id, @RequestBody RequestSignUpDTO request);
 
+    @PreAuthorize("hasRole('INSTITUTION')")
     @GetMapping("/{id}")
     @Operation(description = "Получение заявки")
     ResponseEntity<ResponseSignUpDTO> getSignUp(@PathVariable("id") Integer id);
 
+    @PreAuthorize("hasRole('INSTITUTION')")
     @DeleteMapping("/{id}")
     @Operation(description = "Удаление заявки")
     ResponseEntity<?> deleteSignUp(@PathVariable("id") Integer id);
+
+    @PreAuthorize("hasRole('COMPANY')")
+    @PutMapping("/{id}/status")
+    @Operation(description = "Изменение статуса заявки")
+    ResponseEntity<?> changeSignUpStatus(@PathVariable("id") Integer id, @RequestParam Boolean status);
 }

@@ -26,6 +26,7 @@ public class SignUpServiceImpl implements SignUpService {
             SignUpDAO signUpDAO = signUpDTO.toDAO();
             signUpDAO.setSchedule(scheduleService.get(signUpDTO.getSchedule()));
             signUpDAO.setInstitution(institutionService.get(signUpDTO.getInstitution()));
+            signUpDAO.setStatus(null);
             return signUpRepository.save(signUpDAO);
         } catch (ParseException e) {
             throw new RuntimeException(e);
@@ -65,5 +66,12 @@ public class SignUpServiceImpl implements SignUpService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void changeStatus(Integer id, Boolean status){
+        SignUpDAO signUpDAO = get(id);
+        signUpDAO.setStatus(status);
+        signUpRepository.save(signUpDAO);
     }
 }

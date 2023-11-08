@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name = "roles")
+@Table(name = "roles",uniqueConstraints=@UniqueConstraint(columnNames={"name"}))
 public class RoleDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
