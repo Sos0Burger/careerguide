@@ -11,26 +11,26 @@ import org.springframework.web.bind.annotation.*;
 public interface SignUpApi {
     @PreAuthorize("hasRole('INSTITUTION')")
     @PostMapping
-    @Operation(description = "Создание заявки")
+    @Operation(summary = "Создание заявки")
     ResponseEntity<ResponseSignUpDTO> createSignUp(@RequestBody RequestSignUpDTO request);
 
     @PreAuthorize("hasRole('INSTITUTION')")
     @PutMapping("/{id}")
-    @Operation(description = "Обновление заявки")
+    @Operation(summary = "Обновление заявки")
     ResponseEntity<ResponseSignUpDTO> updateSignUp(@PathVariable("id") Integer id, @RequestBody RequestSignUpDTO request);
 
     @PreAuthorize("hasRole('INSTITUTION')")
     @GetMapping("/{id}")
-    @Operation(description = "Получение заявки")
+    @Operation(summary = "Получение заявки")
     ResponseEntity<ResponseSignUpDTO> getSignUp(@PathVariable("id") Integer id);
 
     @PreAuthorize("hasRole('INSTITUTION')")
     @DeleteMapping("/{id}")
-    @Operation(description = "Удаление заявки")
+    @Operation(summary = "Удаление заявки")
     ResponseEntity<?> deleteSignUp(@PathVariable("id") Integer id);
 
     @PreAuthorize("hasRole('COMPANY')")
     @PutMapping("/{id}/status")
-    @Operation(description = "Изменение статуса заявки")
+    @Operation(summary = "Изменение статуса заявки")
     ResponseEntity<?> changeSignUpStatus(@PathVariable("id") Integer id, @RequestParam Boolean status);
 }

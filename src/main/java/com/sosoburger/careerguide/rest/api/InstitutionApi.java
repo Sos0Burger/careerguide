@@ -11,18 +11,18 @@ import org.springframework.web.bind.annotation.*;
 @PreAuthorize("hasRole('INSTITUTION')")
 public interface InstitutionApi {
     @PostMapping
-    @Operation(description = "Создание учебного заведения")
+    @Operation(summary = "Создание учебного заведения")
     ResponseEntity<ResponseInstitutionDTO> createInstitution(@RequestBody RequestInstitutionDTO request);
 
     @PutMapping("/{id}")
-    @Operation(description = "Обновление учебного заведения")
+    @Operation(summary = "Обновление учебного заведения")
     ResponseEntity<ResponseInstitutionDTO> updateInstitution(@PathVariable("id") Integer id, @RequestBody RequestInstitutionDTO request);
 
     @GetMapping("/{id}")
-    @Operation(description = "Получение учебного заведения")
+    @Operation(summary = "Получение учебного заведения")
     ResponseEntity<ResponseInstitutionDTO> getInstitution(@PathVariable("id") Integer id);
 
     @DeleteMapping("/{id}")
-    @Operation(description = "Удаление учебного заведения")
+    @Operation(summary = "Удаление учебного заведения")
     ResponseEntity<?> deleteInstitution(@PathVariable("id") Integer id);
 }

@@ -14,25 +14,25 @@ import java.util.List;
 @RequestMapping("/company")
 public interface CompanyApi {
 
-    @PreAuthorize("hasRole('COMPANY')")
     @PostMapping
-    @Operation(description = "Создание компании")
+    @Operation(summary = "Создание компании")
+    @PreAuthorize("hasRole('COMPANY')")
     ResponseEntity<ResponseCompanyDTO> createCompany(@RequestBody RequestCompanyDTO request);
 
     @PreAuthorize("hasRole('COMPANY')")
     @PutMapping("/{id}")
-    @Operation(description = "Обновление компании")
+    @Operation(summary = "Обновление компании")
     ResponseEntity<ResponseCompanyDTO> updateCompany(@PathVariable("id") Integer id, @RequestBody RequestCompanyDTO request);
 
     @GetMapping("/{id}")
-    @Operation(description = "Получение компании")
+    @Operation(summary = "Получение компании")
     ResponseEntity<ResponseCompanyDTO> getCompany(@PathVariable("id") Integer id);
     @PreAuthorize("hasRole('COMPANY')")
     @DeleteMapping("/{id}")
-    @Operation(description = "Удаление компании")
+    @Operation(summary = "Удаление компании")
     ResponseEntity<?> delete(@PathVariable("id") Integer id);
 
     @GetMapping("/{id}/schedule")
-    @Operation(description = "Расписание комании")
+    @Operation(summary = "Расписание комании")
     ResponseEntity<List<ResponseScheduleDTO>> getSchedule(@PathVariable("id") Integer id);
 }

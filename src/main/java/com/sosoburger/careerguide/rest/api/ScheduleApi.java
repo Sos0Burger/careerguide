@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.*;
 @PreAuthorize("hasRole('COMPANY')")
 public interface ScheduleApi {
     @PostMapping
-    @Operation(description = "Создание расписание")
+    @Operation(summary = "Создание расписание")
     ResponseEntity<ResponseScheduleDTO> createSchedule(@RequestBody RequestScheduleDTO request);
 
     @PutMapping("/{id}")
-    @Operation(description = "Обновление расписания")
+    @Operation(summary = "Обновление расписания")
     ResponseEntity<ResponseScheduleDTO> updateSchedule(@PathVariable("id") Integer id, @RequestBody RequestScheduleDTO request);
 
     @GetMapping("/{id}")
-    @Operation(description = "Получение расписания")
+    @Operation(summary = "Получение расписания")
     ResponseEntity<ResponseScheduleDTO> getSchedule(@PathVariable("id") Integer id);
 
     @DeleteMapping("/{id}")
-    @Operation(description = "Удаление расписания")
+    @Operation(summary = "Удаление расписания")
     ResponseEntity<?> deleteSchedule(@PathVariable("id") Integer id);
 
 }
