@@ -29,6 +29,10 @@ public interface InstitutionApi {
     @Operation(summary = "Удаление учебного заведения")
     ResponseEntity<?> deleteInstitution(@PathVariable("id") Integer id);
 
+    @GetMapping()
+    @Operation(summary = "Получение всех учебных заведений")
+    ResponseEntity<List<ResponseInstitutionDTO>> getAllInstitution();
+  
     @GetMapping("/{id}/signup-status")
     @Operation(summary = "Заявки, которые ещё не одобрили/отклонили")
     ResponseEntity<List<ResponseSignUpDTO>> getPendingSignUps(@PathVariable("id") Integer id);

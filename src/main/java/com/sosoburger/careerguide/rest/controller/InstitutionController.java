@@ -52,6 +52,12 @@ public class InstitutionController implements InstitutionApi {
     }
 
     @Override
+    public ResponseEntity<List<ResponseInstitutionDTO>> getAllInstitution() {
+        List<ResponseInstitutionDTO> list = new ArrayList<>();
+        institutionService.getAllInstitution().forEach(item->list.add(item.toDTO()));
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+  
     public ResponseEntity<List<ResponseSignUpDTO>> getPendingSignUps(Integer id) {
         List<ResponseSignUpDTO> list = new ArrayList<>();
         signUpService.getInstitutionPendingSignUps(id).forEach(item->list.add(item.toDTO()));

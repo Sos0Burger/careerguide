@@ -8,6 +8,8 @@ import com.sosoburger.careerguide.repository.InstitutionRepository;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class InstitutionServiceImpl implements InstitutionService {
@@ -47,6 +49,11 @@ public class InstitutionServiceImpl implements InstitutionService {
         } else {
             return institutionRepository.findById(id).get();
         }
+    }
+
+    @Override
+    public List<InstitutionDAO> getAllInstitution() {
+            return new ArrayList<>(institutionRepository.findAll());
     }
 
     @Override

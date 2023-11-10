@@ -44,4 +44,7 @@ public interface CompanyApi {
     @GetMapping("/{id}/signup-archive")
     @Operation(summary = "Заявки компании, которые уже были одобрены/отклонены")
     ResponseEntity<List<ResponseSignUpDTO>> getSignUpsArchive(@PathVariable("id") Integer id);
+    @GetMapping()
+    @Operation(summary = "Получить все компании")
+    ResponseEntity<List<ResponseCompanyDTO>> getAllCompany();
 }

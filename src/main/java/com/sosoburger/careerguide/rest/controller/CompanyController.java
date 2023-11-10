@@ -72,4 +72,11 @@ public class CompanyController implements CompanyApi {
         signUpService.getCompanySignUpsArchive(id).forEach(item-> list.add(item.toDTO()));
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<List<ResponseCompanyDTO>> getAllCompany() {
+        List<ResponseCompanyDTO> list = new ArrayList<>();
+        companyService.getAllCompany().forEach(item->list.add(item.toDTO()));
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
 }
