@@ -1,7 +1,5 @@
 package com.sosoburger.careerguide.rest.controller;
 
-import com.sosoburger.careerguide.dao.CompanyDAO;
-import com.sosoburger.careerguide.dao.InstitutionDAO;
 import com.sosoburger.careerguide.dto.request.RequestInstitutionDTO;
 import com.sosoburger.careerguide.dto.response.ResponseInstitutionDTO;
 import com.sosoburger.careerguide.rest.api.InstitutionApi;
@@ -11,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -47,8 +46,10 @@ public class InstitutionController implements InstitutionApi {
     }
 
     @Override
-    public ResponseEntity<List<InstitutionDAO>> getAllInstitution() {
-        return null;
+    public ResponseEntity<List<ResponseInstitutionDTO>> getAllInstitution() {
+        List<ResponseInstitutionDTO> list = new ArrayList<>();
+        institutionService.getAllInstitution().forEach(item->list.add(item.toDTO()));
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
 }

@@ -1,7 +1,5 @@
 package com.sosoburger.careerguide.rest.api;
 
-import com.sosoburger.careerguide.dao.CompanyDAO;
-import com.sosoburger.careerguide.dao.InstitutionDAO;
 import com.sosoburger.careerguide.dto.request.RequestInstitutionDTO;
 import com.sosoburger.careerguide.dto.response.ResponseInstitutionDTO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,5 +29,5 @@ public interface InstitutionApi {
     ResponseEntity<?> deleteInstitution(@PathVariable("id") Integer id);
     @GetMapping()
     @Operation(summary = "Получить всех учебных заведений")
-    ResponseEntity<List<InstitutionDAO>> getAllInstitution();
+    ResponseEntity<List<ResponseInstitutionDTO>> getAllInstitution();
 }

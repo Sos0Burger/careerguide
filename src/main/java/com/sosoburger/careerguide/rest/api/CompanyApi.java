@@ -1,7 +1,6 @@
 package com.sosoburger.careerguide.rest.api;
 
 
-import com.sosoburger.careerguide.dao.CompanyDAO;
 import com.sosoburger.careerguide.dto.request.RequestCompanyDTO;
 import com.sosoburger.careerguide.dto.response.ResponseCompanyDTO;
 import com.sosoburger.careerguide.dto.response.ResponseScheduleDTO;
@@ -47,5 +46,5 @@ public interface CompanyApi {
     ResponseEntity<List<ResponseSignUpDTO>> getSignUpsArchive(@PathVariable("id") Integer id);
     @GetMapping()
     @Operation(summary = "Получить все компании")
-    ResponseEntity<List<CompanyDAO>> getAllCompany();
+    ResponseEntity<List<ResponseCompanyDTO>> getAllCompany();
 }

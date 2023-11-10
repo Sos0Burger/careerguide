@@ -1,6 +1,5 @@
 package com.sosoburger.careerguide.rest.controller;
 
-import com.sosoburger.careerguide.dao.CompanyDAO;
 import com.sosoburger.careerguide.dto.request.RequestCompanyDTO;
 import com.sosoburger.careerguide.dto.response.ResponseCompanyDTO;
 import com.sosoburger.careerguide.dto.response.ResponseScheduleDTO;
@@ -75,7 +74,9 @@ public class CompanyController implements CompanyApi {
     }
 
     @Override
-    public ResponseEntity<List<CompanyDAO>> getAllCompany() {
-        return new ResponseEntity<>(companyService.getAllCompany(), HttpStatus.OK);
+    public ResponseEntity<List<ResponseCompanyDTO>> getAllCompany() {
+        List<ResponseCompanyDTO> list = new ArrayList<>();
+        companyService.getAllCompany().forEach(item->list.add(item.toDTO()));
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }
