@@ -10,6 +10,7 @@ public interface CompanyService {
     CompanyDAO save (RequestCompanyDTO companyDTO);
     CompanyDAO update (Integer id, RequestCompanyDTO companyDTO);
     CompanyDAO get (Integer id);
+    List<CompanyDAO> getAllCompany();
     void delete(Integer id);
 
     List<ScheduleDAO> getSchedule(Integer id);

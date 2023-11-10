@@ -1,6 +1,7 @@
 package com.sosoburger.careerguide.rest.api;
 
 
+import com.sosoburger.careerguide.dao.CompanyDAO;
 import com.sosoburger.careerguide.dto.request.RequestCompanyDTO;
 import com.sosoburger.careerguide.dto.response.ResponseCompanyDTO;
 import com.sosoburger.careerguide.dto.response.ResponseScheduleDTO;
@@ -44,4 +45,7 @@ public interface CompanyApi {
     @GetMapping("/{id}/signup-archive")
     @Operation(summary = "Заявки компании, которые уже были одобрены/отклонены")
     ResponseEntity<List<ResponseSignUpDTO>> getSignUpsArchive(@PathVariable("id") Integer id);
+    @GetMapping()
+    @Operation(summary = "Получить все компании")
+    ResponseEntity<List<CompanyDAO>> getAllCompany();
 }

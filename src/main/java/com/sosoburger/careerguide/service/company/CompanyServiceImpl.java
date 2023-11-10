@@ -6,6 +6,7 @@ import com.sosoburger.careerguide.dto.request.RequestCompanyDTO;
 import com.sosoburger.careerguide.exception.NotFoundException;
 import com.sosoburger.careerguide.repository.CompanyRepository;
 import com.sosoburger.careerguide.repository.ScheduleRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +49,11 @@ public class CompanyServiceImpl implements CompanyService {
         } else {
             return companyRepository.findById(id).get();
         }
+    }
+
+    @Override
+    public List<CompanyDAO> getAllCompany() {
+            return companyRepository.findAll();
     }
 
     @Override
