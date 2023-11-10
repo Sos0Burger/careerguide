@@ -2,6 +2,7 @@ package com.sosoburger.careerguide.rest.api;
 
 import com.sosoburger.careerguide.dto.request.RequestInstitutionDTO;
 import com.sosoburger.careerguide.dto.response.ResponseInstitutionDTO;
+import com.sosoburger.careerguide.dto.response.ResponseSignUpDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,7 +28,16 @@ public interface InstitutionApi {
     @DeleteMapping("/{id}")
     @Operation(summary = "Удаление учебного заведения")
     ResponseEntity<?> deleteInstitution(@PathVariable("id") Integer id);
+
     @GetMapping()
-    @Operation(summary = "Получить всех учебных заведений")
+    @Operation(summary = "Получение всех учебных заведений")
     ResponseEntity<List<ResponseInstitutionDTO>> getAllInstitution();
+  
+    @GetMapping("/{id}/signup-status")
+    @Operation(summary = "Заявки, которые ещё не одобрили/отклонили")
+    ResponseEntity<List<ResponseSignUpDTO>> getPendingSignUps(@PathVariable("id") Integer id);
+
+    @GetMapping("/{id}/signup-archive")
+    @Operation(summary = "Заявки, которые уже были одобрены/отклонены")
+    ResponseEntity<List<ResponseSignUpDTO>> getSignUpsArchive(@PathVariable("id") Integer id);
 }

@@ -14,12 +14,10 @@ public interface SignUpApi {
     @Operation(summary = "Создание заявки")
     ResponseEntity<ResponseSignUpDTO> createSignUp(@RequestBody RequestSignUpDTO request);
 
-    @PreAuthorize("hasRole('INSTITUTION')")
     @PutMapping("/{id}")
     @Operation(summary = "Обновление заявки")
     ResponseEntity<ResponseSignUpDTO> updateSignUp(@PathVariable("id") Integer id, @RequestBody RequestSignUpDTO request);
 
-    @PreAuthorize("hasRole('INSTITUTION')")
     @GetMapping("/{id}")
     @Operation(summary = "Получение заявки")
     ResponseEntity<ResponseSignUpDTO> getSignUp(@PathVariable("id") Integer id);
