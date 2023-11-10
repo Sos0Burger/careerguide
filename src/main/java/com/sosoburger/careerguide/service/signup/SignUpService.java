@@ -12,7 +12,11 @@ public interface SignUpService {
     void delete(Integer id);
     void changeStatus(Integer id, Boolean status);
 
-    List<SignUpDAO> getPendingSignUps(Integer id);
+    List<SignUpDAO> getCompanyPendingSignUps(Integer id);
 
-    List<SignUpDAO> getSignUpsArchive(Integer id);
+    List<SignUpDAO> getCompanySignUpsArchive(Integer id);
+
+    List<SignUpDAO> getInstitutionPendingSignUps(Integer id);
+
+    List<SignUpDAO> getInstitutionSignUpsArchive(Integer id);
 }

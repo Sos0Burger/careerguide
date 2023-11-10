@@ -4,6 +4,7 @@ import com.sosoburger.careerguide.dao.SignUpDAO;
 import com.sosoburger.careerguide.dto.request.RequestSignUpDTO;
 import com.sosoburger.careerguide.exception.NotFoundException;
 import com.sosoburger.careerguide.repository.SignUpRepository;
+import com.sosoburger.careerguide.service.company.CompanyService;
 import com.sosoburger.careerguide.service.file.FileService;
 import com.sosoburger.careerguide.service.institution.InstitutionService;
 import com.sosoburger.careerguide.service.schedule.ScheduleService;
@@ -24,6 +25,9 @@ public class SignUpServiceImpl implements SignUpService {
     private InstitutionService institutionService;
     @Autowired
     private FileService fileService;
+
+    @Autowired
+    private CompanyService companyService;
 
     @Override
     public SignUpDAO save(RequestSignUpDTO signUpDTO) {
@@ -87,20 +91,32 @@ public class SignUpServiceImpl implements SignUpService {
     }
 
     @Override
-    public List<SignUpDAO> getPendingSignUps(Integer id) {
-        ArrayList<SignUpDAO> list = new ArrayList<>(signUpRepository.getPendingSignUps(id));
-        list.sort(Comparator.comparing(SignUpDAO::getDate));
-        Collections.reverse(list);
+    public List<SignUpDAO> getCompanyPendingSignUps(Integer id) {
+        companyService.get(id);
+        return new ArrayList<>(signUpRepository.getCompanyPendingSignUps(id));
+    }
+
+    @Override
+    public List<SignUpDAO> getCompanySignUpsArchive(Integer id) {
+        companyService.get(id);
+        List<SignUpDAO> list = new ArrayList<>();
+        list.addAll(signUpRepository.getCompanyReviewedSignUps(id, true));
+        list.addAll(signUpRepository.getCompanyReviewedSignUps(id, false));
         return list;
     }
 
     @Override
-    public List<SignUpDAO> getSignUpsArchive(Integer id) {
+    public List<SignUpDAO> getInstitutionPendingSignUps(Integer id) {
+        institutionService.get(id);
+        return new ArrayList<>(signUpRepository.getInstitutionPendingSignUps(id));
+    }
+
+    @Override
+    public List<SignUpDAO> getInstitutionSignUpsArchive(Integer id) {
+        institutionService.get(id);
         List<SignUpDAO> list = new ArrayList<>();
-        list.addAll(signUpRepository.getReviewedSignUps(id, true));
-        list.addAll(signUpRepository.getReviewedSignUps(id, false));
-        list.sort(Comparator.comparing(SignUpDAO::getDate));
-        Collections.reverse(list);
+        list.addAll(signUpRepository.getInstitutionReviewedSignUps(id, true));
+        list.addAll(signUpRepository.getInstitutionReviewedSignUps(id, false));
         return list;
     }
 }
