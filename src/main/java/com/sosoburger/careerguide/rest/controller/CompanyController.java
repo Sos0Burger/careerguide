@@ -3,8 +3,10 @@ package com.sosoburger.careerguide.rest.controller;
 import com.sosoburger.careerguide.dto.request.RequestCompanyDTO;
 import com.sosoburger.careerguide.dto.response.ResponseCompanyDTO;
 import com.sosoburger.careerguide.dto.response.ResponseScheduleDTO;
+import com.sosoburger.careerguide.dto.response.ResponseSignUpDTO;
 import com.sosoburger.careerguide.rest.api.CompanyApi;
 import com.sosoburger.careerguide.service.company.CompanyService;
+import com.sosoburger.careerguide.service.signup.SignUpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +19,12 @@ import java.util.List;
 public class CompanyController implements CompanyApi {
     @Autowired
     private final CompanyService companyService;
+    @Autowired
+    private final SignUpService signUpService;
 
-    public CompanyController(CompanyService companyService) {
+    public CompanyController(CompanyService companyService, SignUpService signUpService) {
         this.companyService = companyService;
+        this.signUpService = signUpService;
     }
 
     @Override
@@ -52,5 +57,19 @@ public class CompanyController implements CompanyApi {
         List<ResponseScheduleDTO> schedule = new ArrayList<>();
         list.forEach(scheduleDAO -> schedule.add(scheduleDAO.toDTO()));
         return new ResponseEntity<>(schedule, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<List<ResponseSignUpDTO>> getPendingSignUps(Integer id) {
+        List<ResponseSignUpDTO> list = new ArrayList<>();
+        signUpService.getPendingSignUps(id).forEach(item-> list.add(item.toDTO()));
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<List<ResponseSignUpDTO>> getSignUpsArchive(Integer id) {
+        List<ResponseSignUpDTO> list = new ArrayList<>();
+        signUpService.getSignUpsArchive(id).forEach(item-> list.add(item.toDTO()));
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }

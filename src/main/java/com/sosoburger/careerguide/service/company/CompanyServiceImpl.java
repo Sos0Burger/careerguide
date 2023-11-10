@@ -62,6 +62,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public List<ScheduleDAO> getSchedule(Integer id) {
+        get(id);
         return scheduleRepository.findByCompany(id);
     }
 }
