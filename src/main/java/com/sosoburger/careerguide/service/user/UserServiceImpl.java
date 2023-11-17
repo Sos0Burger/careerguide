@@ -1,6 +1,7 @@
 package com.sosoburger.careerguide.service.user;
 
 import com.sosoburger.careerguide.dao.UserDAO;
+import com.sosoburger.careerguide.exception.NotFoundException;
 import com.sosoburger.careerguide.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -31,5 +32,12 @@ public class UserServiceImpl implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getLogin(),
                 user.getPassword(),
                 authorities);
+    }
+
+    public UserDAO findById(Integer id){
+        if(userRepository.existsById(id)){
+            return userRepository.findById(id).get();
+        }
+        throw new NotFoundException("Пользователь не найден");
     }
 }

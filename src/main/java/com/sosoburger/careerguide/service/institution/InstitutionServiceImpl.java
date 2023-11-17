@@ -3,8 +3,11 @@ package com.sosoburger.careerguide.service.institution;
 
 import com.sosoburger.careerguide.dao.InstitutionDAO;
 import com.sosoburger.careerguide.dto.request.RequestInstitutionDTO;
+import com.sosoburger.careerguide.exception.ConflictException;
 import com.sosoburger.careerguide.exception.NotFoundException;
 import com.sosoburger.careerguide.repository.InstitutionRepository;
+import com.sosoburger.careerguide.service.user.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -14,15 +17,23 @@ import java.util.List;
 @Service
 public class InstitutionServiceImpl implements InstitutionService {
     private final InstitutionRepository institutionRepository;
+    @Autowired
+    private final UserServiceImpl userService;
 
-    public InstitutionServiceImpl(InstitutionRepository institutionRepository) {
+    public InstitutionServiceImpl(InstitutionRepository institutionRepository, UserServiceImpl userService) {
         this.institutionRepository = institutionRepository;
+        this.userService = userService;
     }
 
     @Override
     public InstitutionDAO save(RequestInstitutionDTO institutionDTO) {
+        if(institutionRepository.findByUser(userService.findById(institutionDTO.getUser()))!=null){
+            throw new ConflictException("Учебное заведение уже создано этим аккаунтом");
+        }
         try {
-            return institutionRepository.save(institutionDTO.toDAO());
+            var institution = institutionDTO.toDAO();
+            institution.setUser(userService.findById(institutionDTO.getUser()));
+            return institutionRepository.save(institution);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -43,7 +54,7 @@ public class InstitutionServiceImpl implements InstitutionService {
 
     @Override
     public InstitutionDAO get(Integer id) {
-        String notFound = String.format("Учебное заведение %d не найден.", id);
+        String notFound = String.format("Учебное заведение %d не найдено.", id);
         if (institutionRepository.findById(id).isEmpty()) {
             throw new NotFoundException(notFound);
         } else {

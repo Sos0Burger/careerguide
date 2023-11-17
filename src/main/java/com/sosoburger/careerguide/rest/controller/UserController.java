@@ -4,6 +4,7 @@ import com.sosoburger.careerguide.dao.RoleDAO;
 import com.sosoburger.careerguide.dao.UserDAO;
 import com.sosoburger.careerguide.dto.request.LoginDTO;
 import com.sosoburger.careerguide.dto.request.RegDTO;
+import com.sosoburger.careerguide.dto.response.ResponseUserDTO;
 import com.sosoburger.careerguide.exception.NotFoundException;
 import com.sosoburger.careerguide.repository.RoleRepository;
 import com.sosoburger.careerguide.repository.UserRepository;
@@ -35,12 +36,12 @@ public class UserController implements UserApi {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public ResponseEntity<String> authenticateUser(LoginDTO loginDto) {
+    public ResponseEntity<ResponseUserDTO> authenticateUser(LoginDTO loginDto) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginDto.getLogin(), loginDto.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new ResponseEntity<>("User signed-in successfully!.", HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseUserDTO(userRepository.findByLogin(loginDto.getLogin()).get().getId()), HttpStatus.OK);
     }
     @Override
     public ResponseEntity<?> registerUser(RegDTO regDTO) {

@@ -6,19 +6,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.modelmapper.ModelMapper;
 
 import java.util.List;
 
 @Entity
-@Table(name = "institutions")
+@Table(name = "institutions", uniqueConstraints=@UniqueConstraint(columnNames={"user_id"}))
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class InstitutionDAO {
-    @Transient
-    private final ModelMapper modelMapper = new ModelMapper();
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +29,16 @@ public class InstitutionDAO {
 
     @OneToMany(mappedBy = "institution")
     private List<SignUpDAO> signUps;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private UserDAO user;
     public ResponseInstitutionDTO toDTO(){
-        return modelMapper.map(this, ResponseInstitutionDTO.class);
+        return new ResponseInstitutionDTO(
+                id,
+                name,
+                image,
+                user.getId()
+        );
     }
 }

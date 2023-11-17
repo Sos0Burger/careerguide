@@ -2,6 +2,7 @@ package com.sosoburger.careerguide.rest.api;
 
 import com.sosoburger.careerguide.dto.request.LoginDTO;
 import com.sosoburger.careerguide.dto.request.RegDTO;
+import com.sosoburger.careerguide.dto.response.ResponseUserDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface UserApi {
     @PostMapping("/signin")
     @Operation(summary = "Авторизация")
-    ResponseEntity<String> authenticateUser(@RequestBody LoginDTO loginDto);
+    ResponseEntity<ResponseUserDTO> authenticateUser(@RequestBody LoginDTO loginDto);
     @PostMapping("/signup")
 
     @Operation(summary = "Создание пользователя")

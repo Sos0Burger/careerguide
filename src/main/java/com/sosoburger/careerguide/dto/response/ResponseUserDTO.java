@@ -9,14 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResponseInstitutionDTO {
+public class ResponseUserDTO {
     private Integer id;
-
-    private String name;
-
-    private String image;
-
-    private Integer user;
-
-
 }

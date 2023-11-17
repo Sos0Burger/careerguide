@@ -35,4 +35,9 @@ public class CustomExceptionHandler {
         log.error(UploadException.getMessage(), UploadException);
         return new ResponseEntity<>(UploadException.getMessage(), HttpStatus.FORBIDDEN);
     }
+    @ExceptionHandler(ConflictException.class)
+    public ResponseEntity<String> handle(ConflictException exception) {
+        log.error(exception.getMessage(), exception);
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.CONFLICT);
+    }
 }
