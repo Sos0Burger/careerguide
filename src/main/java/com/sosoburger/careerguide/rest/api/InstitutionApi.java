@@ -15,7 +15,7 @@ import java.util.List;
 public interface InstitutionApi {
     @PostMapping
     @Operation(summary = "Создание учебного заведения")
-    ResponseEntity<ResponseInstitutionDTO> createInstitution(@RequestBody RequestInstitutionDTO request);
+    ResponseEntity<ResponseInstitutionDTO> createInstitution(@RequestBody RequestInstitutionDTO request, @RequestParam("login") String login);
 
     @PutMapping("/{id}")
     @Operation(summary = "Обновление учебного заведения")

@@ -26,13 +26,13 @@ public class InstitutionServiceImpl implements InstitutionService {
     }
 
     @Override
-    public InstitutionDAO save(RequestInstitutionDTO institutionDTO) {
-        if(institutionRepository.findByUser(userService.findByLogin(institutionDTO.getLogin()))!=null){
+    public InstitutionDAO save(RequestInstitutionDTO institutionDTO, String login) {
+        if(institutionRepository.findByUser(userService.findByLogin(login))!=null){
             throw new ConflictException("Учебное заведение уже создано этим аккаунтом");
         }
         try {
             var institution = institutionDTO.toDAO();
-            institution.setUser(userService.findByLogin(institutionDTO.getLogin()));
+            institution.setUser(userService.findByLogin(login));
             return institutionRepository.save(institution);
         } catch (ParseException e) {
             throw new RuntimeException(e);

@@ -29,8 +29,8 @@ public class InstitutionController implements InstitutionApi {
     }
 
     @Override
-    public ResponseEntity<ResponseInstitutionDTO> createInstitution(RequestInstitutionDTO request) {
-        var institution = institutionService.save(request);
+    public ResponseEntity<ResponseInstitutionDTO> createInstitution(RequestInstitutionDTO request, String login) {
+        var institution = institutionService.save(request, login);
         return new ResponseEntity<>(institution.toDTO(), HttpStatus.CREATED);
     }
 
