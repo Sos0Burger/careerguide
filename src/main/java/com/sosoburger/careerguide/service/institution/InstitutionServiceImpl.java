@@ -27,7 +27,7 @@ public class InstitutionServiceImpl implements InstitutionService {
 
     @Override
     public InstitutionDAO save(RequestInstitutionDTO institutionDTO, String login) {
-        if(institutionRepository.findByUser(userService.findByLogin(login))!=null){
+        if (institutionRepository.findByUser(userService.findByLogin(login)) != null) {
             throw new ConflictException("Учебное заведение уже создано этим аккаунтом");
         }
         try {
@@ -42,14 +42,9 @@ public class InstitutionServiceImpl implements InstitutionService {
     @Override
     public InstitutionDAO update(Integer id, RequestInstitutionDTO institutionDTO) {
         InstitutionDAO savedInstitutionDAO = get(id);
-        try {
-            InstitutionDAO institutionDAO = institutionDTO.toDAO();
-            institutionDAO.setId(savedInstitutionDAO.getId());
-            institutionDAO.setSignUps(savedInstitutionDAO.getSignUps());
-            return institutionRepository.save(institutionDAO);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        savedInstitutionDAO.setName(institutionDTO.getName());
+        savedInstitutionDAO.setImage(institutionDTO.getImage());
+        return institutionRepository.save(savedInstitutionDAO);
     }
 
     @Override
@@ -64,7 +59,7 @@ public class InstitutionServiceImpl implements InstitutionService {
 
     @Override
     public List<InstitutionDAO> getAllInstitution() {
-            return new ArrayList<>(institutionRepository.findAll());
+        return new ArrayList<>(institutionRepository.findAll());
     }
 
     @Override
