@@ -18,7 +18,7 @@ public interface CompanyApi {
     @PostMapping
     @Operation(summary = "Создание компании")
     @PreAuthorize("hasRole('COMPANY')")
-    ResponseEntity<ResponseCompanyDTO> createCompany(@RequestBody RequestCompanyDTO request);
+    ResponseEntity<ResponseCompanyDTO> createCompany(@RequestBody RequestCompanyDTO request, @RequestParam("login") String login);
 
     @PreAuthorize("hasRole('COMPANY')")
     @PutMapping("/{id}")
@@ -47,4 +47,8 @@ public interface CompanyApi {
     @GetMapping()
     @Operation(summary = "Получить все компании")
     ResponseEntity<List<ResponseCompanyDTO>> getAllCompany();
+
+    @GetMapping("/login")
+    @Operation(summary = "Получение компании по логину")
+    ResponseEntity<ResponseCompanyDTO> getCompanyByLogin(@RequestParam("login") String login);
 }

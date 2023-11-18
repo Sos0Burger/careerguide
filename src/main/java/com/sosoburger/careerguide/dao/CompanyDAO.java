@@ -7,7 +7,7 @@ import org.modelmapper.ModelMapper;
 import java.util.List;
 
 @Entity
-@Table(name = "companies")
+@Table(name = "companies", uniqueConstraints=@UniqueConstraint(columnNames={"user_id"}))
 @Getter
 @Setter
 @NoArgsConstructor
@@ -42,6 +42,10 @@ public class CompanyDAO {
 
     @OneToMany(mappedBy = "company")
     private List<ScheduleDAO> schedule;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private UserDAO user;
 
     public ResponseCompanyDTO toDTO(){
         return modelMapper.map(this, ResponseCompanyDTO.class);

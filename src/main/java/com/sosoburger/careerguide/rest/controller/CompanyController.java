@@ -28,11 +28,10 @@ public class CompanyController implements CompanyApi {
     }
 
     @Override
-    public ResponseEntity<ResponseCompanyDTO> createCompany(RequestCompanyDTO request) {
-        var company = companyService.save(request);
+    public ResponseEntity<ResponseCompanyDTO> createCompany(RequestCompanyDTO request, String login) {
+        var company = companyService.save(request, login);
         return new ResponseEntity<>(company.toDTO(), HttpStatus.CREATED);
     }
-
     @Override
     public ResponseEntity<ResponseCompanyDTO> updateCompany(Integer id, RequestCompanyDTO request) {
         var company = companyService.update(id, request);
@@ -78,5 +77,10 @@ public class CompanyController implements CompanyApi {
         List<ResponseCompanyDTO> list = new ArrayList<>();
         companyService.getAllCompany().forEach(item->list.add(item.toDTO()));
         return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<ResponseCompanyDTO> getCompanyByLogin(String login) {
+        return new ResponseEntity<>(companyService.findByLogin(login).toDTO(), HttpStatus.OK);
     }
 }

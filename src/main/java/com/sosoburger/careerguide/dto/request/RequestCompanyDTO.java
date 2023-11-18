@@ -1,6 +1,7 @@
 package com.sosoburger.careerguide.dto.request;
 
 import com.sosoburger.careerguide.dao.CompanyDAO;
+import com.sosoburger.careerguide.dao.InstitutionDAO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,9 @@ public class RequestCompanyDTO {
 
     public CompanyDAO toDAO() throws ParseException {
         ModelMapper modelMapper = new ModelMapper();
+        modelMapper.typeMap(RequestCompanyDTO.class, CompanyDAO.class).addMappings(mapper ->{
+            mapper.skip(CompanyDAO::setUser);
+        });
         return modelMapper.map(this, CompanyDAO.class);
     }
 }

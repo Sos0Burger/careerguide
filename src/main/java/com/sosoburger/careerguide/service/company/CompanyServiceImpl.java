@@ -6,6 +6,7 @@ import com.sosoburger.careerguide.dto.request.RequestCompanyDTO;
 import com.sosoburger.careerguide.exception.NotFoundException;
 import com.sosoburger.careerguide.repository.CompanyRepository;
 import com.sosoburger.careerguide.repository.ScheduleRepository;
+import com.sosoburger.careerguide.service.user.UserServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,10 +20,14 @@ public class CompanyServiceImpl implements CompanyService {
     private CompanyRepository companyRepository;
     @Autowired
     private ScheduleRepository scheduleRepository;
+    @Autowired
+    private UserServiceImpl userService;
     @Override
-    public CompanyDAO save(RequestCompanyDTO companyDTO) {
+    public CompanyDAO save(RequestCompanyDTO companyDTO, String login) {
         try {
-            return companyRepository.save(companyDTO.toDAO());
+            var company = companyDTO.toDAO();
+            company.setUser(userService.findByLogin(login));
+            return companyRepository.save(company);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -70,5 +75,10 @@ public class CompanyServiceImpl implements CompanyService {
     public List<ScheduleDAO> getSchedule(Integer id) {
         get(id);
         return scheduleRepository.findByCompany(id);
+    }
+
+    @Override
+    public CompanyDAO findByLogin(String login) {
+        return companyRepository.findByUser(userService.findByLogin(login));
     }
 }
