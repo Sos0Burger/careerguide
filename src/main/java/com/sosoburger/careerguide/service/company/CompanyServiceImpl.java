@@ -36,14 +36,13 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public CompanyDAO update(Integer id, RequestCompanyDTO companyDTO) {
         CompanyDAO savedCompanyDAO = get(id);
-        try {
-            CompanyDAO companyDAO = companyDTO.toDAO();
-            companyDAO.setCompanyId(savedCompanyDAO.getCompanyId());
-            companyDAO.setSchedule(savedCompanyDAO.getSchedule());
-            return companyRepository.save(companyDAO);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        savedCompanyDAO.setCompanyName(companyDTO.getCompanyName());
+        savedCompanyDAO.setImage(companyDTO.getImage());
+        savedCompanyDAO.setAddress(companyDTO.getAddress());
+        savedCompanyDAO.setDescription(companyDTO.getDescription());
+        savedCompanyDAO.setEmail(companyDTO.getEmail());
+        savedCompanyDAO.setPhone(companyDTO.getPhone());
+        return companyRepository.save(savedCompanyDAO);
     }
 
     @Override
