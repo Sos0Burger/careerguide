@@ -19,14 +19,13 @@ public class RequestInstitutionDTO {
 
     private String image;
 
-    private Integer user;
+    private String login;
     public InstitutionDAO toDAO() throws ParseException {
         ModelMapper modelMapper = new ModelMapper();
 
         modelMapper.typeMap(RequestInstitutionDTO.class, InstitutionDAO.class).addMappings(mapper ->{
             mapper.skip(InstitutionDAO::setUser);
         });
-
         return modelMapper.map(this, InstitutionDAO.class);
     }
 }

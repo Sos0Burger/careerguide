@@ -37,8 +37,7 @@ public class InstitutionDAO {
         return new ResponseInstitutionDTO(
                 id,
                 name,
-                image,
-                user.getId()
+                image
         );
     }
 }

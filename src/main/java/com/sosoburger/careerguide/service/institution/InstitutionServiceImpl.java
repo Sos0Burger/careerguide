@@ -27,12 +27,12 @@ public class InstitutionServiceImpl implements InstitutionService {
 
     @Override
     public InstitutionDAO save(RequestInstitutionDTO institutionDTO) {
-        if(institutionRepository.findByUser(userService.findById(institutionDTO.getUser()))!=null){
+        if(institutionRepository.findByUser(userService.findByLogin(institutionDTO.getLogin()))!=null){
             throw new ConflictException("Учебное заведение уже создано этим аккаунтом");
         }
         try {
             var institution = institutionDTO.toDAO();
-            institution.setUser(userService.findById(institutionDTO.getUser()));
+            institution.setUser(userService.findByLogin(institutionDTO.getLogin()));
             return institutionRepository.save(institution);
         } catch (ParseException e) {
             throw new RuntimeException(e);
@@ -75,5 +75,10 @@ public class InstitutionServiceImpl implements InstitutionService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public InstitutionDAO getByLogin(String login) {
+        return institutionRepository.findByUser(userService.findByLogin(login));
     }
 }

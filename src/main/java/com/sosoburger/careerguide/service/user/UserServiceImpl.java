@@ -40,4 +40,11 @@ public class UserServiceImpl implements UserDetailsService {
         }
         throw new NotFoundException("Пользователь не найден");
     }
+
+    public UserDAO findByLogin(String login){
+        if (userRepository.existsByLogin(login)){
+            return userRepository.findByLogin(login).get();
+        }
+        throw new NotFoundException("Пользователь не найден");
+    }
 }

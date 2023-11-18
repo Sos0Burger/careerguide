@@ -40,4 +40,8 @@ public interface InstitutionApi {
     @GetMapping("/{id}/signup-archive")
     @Operation(summary = "Заявки, которые уже были одобрены/отклонены")
     ResponseEntity<List<ResponseSignUpDTO>> getSignUpsArchive(@PathVariable("id") Integer id);
+
+    @GetMapping("/login")
+    @Operation(summary = "Получение школы по логину")
+    ResponseEntity<ResponseInstitutionDTO> getInstitutionByLogin(@RequestParam("login")String login);
 }

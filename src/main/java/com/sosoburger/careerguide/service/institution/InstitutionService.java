@@ -12,4 +12,6 @@ public interface InstitutionService {
     InstitutionDAO get (Integer id);
     List<InstitutionDAO> getAllInstitution();
     void delete(Integer id);
+
+    InstitutionDAO getByLogin(String login);
 }

@@ -16,7 +16,4 @@ public class ResponseInstitutionDTO {
 
     private String image;
 
-    private Integer user;
-
-
 }

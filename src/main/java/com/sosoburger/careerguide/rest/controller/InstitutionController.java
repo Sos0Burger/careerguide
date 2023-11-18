@@ -1,5 +1,6 @@
 package com.sosoburger.careerguide.rest.controller;
 
+import com.sosoburger.careerguide.dao.UserDAO;
 import com.sosoburger.careerguide.dto.request.RequestInstitutionDTO;
 import com.sosoburger.careerguide.dto.response.ResponseInstitutionDTO;
 import com.sosoburger.careerguide.dto.response.ResponseSignUpDTO;
@@ -69,5 +70,10 @@ public class InstitutionController implements InstitutionApi {
         List<ResponseSignUpDTO> list = new ArrayList<>();
         signUpService.getInstitutionSignUpsArchive(id).forEach(item->list.add(item.toDTO()));
         return new ResponseEntity<>(list,HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<ResponseInstitutionDTO> getInstitutionByLogin(String login) {
+        return new ResponseEntity<>(institutionService.getByLogin(login).toDTO(), HttpStatus.OK);
     }
 }
