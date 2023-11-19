@@ -37,6 +37,18 @@ public class SignUpDAO {
     @Column(name = "status")
     private Boolean status;
 
+    @Column(name = "purpose")
+    private String purpose;
+
+    @Column(name = "groupname")
+    private String groupname;
+
+    @Column(name = "direction")
+    private String direction;
+
+    @Column(name = "count")
+    private Integer count;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "schedule_id", nullable = false)
     private ScheduleDAO schedule;
@@ -56,6 +68,10 @@ public class SignUpDAO {
                 phone,
                 date,
                 status,
+                purpose,
+                groupname,
+                direction,
+                count,
                 schedule.getId(),
                 institution.getId(),
                 file == null ?

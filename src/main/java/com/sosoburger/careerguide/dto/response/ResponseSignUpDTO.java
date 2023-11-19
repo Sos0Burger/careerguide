@@ -23,6 +23,14 @@ public class ResponseSignUpDTO {
 
     private Boolean status;
 
+    private String purpose;
+
+    private String group;
+
+    private String direction;
+
+    private Integer count;
+
     private Integer scheduleId;
 
     private Integer institutionId;

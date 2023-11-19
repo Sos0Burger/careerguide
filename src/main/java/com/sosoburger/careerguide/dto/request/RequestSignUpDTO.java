@@ -28,6 +28,14 @@ public class RequestSignUpDTO {
 
     private Integer institution;
 
+    private String purpose;
+
+    private String groupname;
+
+    private String direction;
+
+    private Integer count;
+
     private Integer file;
 
     public SignUpDAO toDAO() throws ParseException {
