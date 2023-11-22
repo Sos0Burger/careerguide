@@ -74,6 +74,11 @@ public class InstitutionController implements InstitutionApi {
 
     @Override
     public ResponseEntity<ResponseInstitutionDTO> getInstitutionByLogin(String login) {
-        return new ResponseEntity<>(institutionService.getByLogin(login).toDTO(), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(institutionService.getByLogin(login).toDTO(), HttpStatus.OK);
+        }
+        catch (NullPointerException ex){
+            return new ResponseEntity<>(null, HttpStatus.OK);
+        }
     }
 }

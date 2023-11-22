@@ -36,4 +36,6 @@ public class ResponseSignUpDTO {
     private Integer institutionId;
 
     private Integer file;
+
+    private String image;
 }

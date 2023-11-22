@@ -76,7 +76,8 @@ public class SignUpDAO {
                 institution.getId(),
                 file == null ?
                         null :
-                        file.getId()
+                        file.getId(),
+                schedule.getCompany().getImage()
         );
     }
 }
