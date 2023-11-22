@@ -106,14 +106,13 @@ public class SignUpServiceImpl implements SignUpService {
     }
 
     @Override
-    public List<SignUpDAO> getInstitutionPendingSignUps(Integer id) {
-        institutionService.get(id);
-        return new ArrayList<>(signUpRepository.getInstitutionPendingSignUps(id));
+    public List<SignUpDAO> getInstitutionPendingSignUps(String login) {
+        return new ArrayList<>(signUpRepository.getInstitutionPendingSignUps(institutionService.getByLogin(login).getId()));
     }
 
     @Override
-    public List<SignUpDAO> getInstitutionSignUpsArchive(Integer id) {
-        institutionService.get(id);
+    public List<SignUpDAO> getInstitutionSignUpsArchive(String login) {
+        Integer id = institutionService.getByLogin(login).getId();
         List<SignUpDAO> list = new ArrayList<>();
         list.addAll(signUpRepository.getInstitutionReviewedSignUps(id, true));
         list.addAll(signUpRepository.getInstitutionReviewedSignUps(id, false));

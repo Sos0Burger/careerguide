@@ -16,7 +16,7 @@ public interface SignUpService {
 
     List<SignUpDAO> getCompanySignUpsArchive(Integer id);
 
-    List<SignUpDAO> getInstitutionPendingSignUps(Integer id);
+    List<SignUpDAO> getInstitutionPendingSignUps(String login);
 
-    List<SignUpDAO> getInstitutionSignUpsArchive(Integer id);
+    List<SignUpDAO> getInstitutionSignUpsArchive(String login);
 }

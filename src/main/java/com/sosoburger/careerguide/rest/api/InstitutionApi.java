@@ -33,13 +33,13 @@ public interface InstitutionApi {
     @Operation(summary = "Получение всех учебных заведений")
     ResponseEntity<List<ResponseInstitutionDTO>> getAllInstitution();
   
-    @GetMapping("/{id}/signup-status")
+    @GetMapping("/{login}/signup-status")
     @Operation(summary = "Заявки, которые ещё не одобрили/отклонили")
-    ResponseEntity<List<ResponseSignUpDTO>> getPendingSignUps(@PathVariable("id") Integer id);
+    ResponseEntity<List<ResponseSignUpDTO>> getPendingSignUps(@PathVariable("login") String login);
 
-    @GetMapping("/{id}/signup-archive")
+    @GetMapping("/{login}/signup-archive")
     @Operation(summary = "Заявки, которые уже были одобрены/отклонены")
-    ResponseEntity<List<ResponseSignUpDTO>> getSignUpsArchive(@PathVariable("id") Integer id);
+    ResponseEntity<List<ResponseSignUpDTO>> getSignUpsArchive(@PathVariable("login") String login);
 
     @GetMapping("/login")
     @Operation(summary = "Получение школы по логину")

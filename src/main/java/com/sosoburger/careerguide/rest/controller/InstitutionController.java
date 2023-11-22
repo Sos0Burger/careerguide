@@ -59,16 +59,16 @@ public class InstitutionController implements InstitutionApi {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
   
-    public ResponseEntity<List<ResponseSignUpDTO>> getPendingSignUps(Integer id) {
+    public ResponseEntity<List<ResponseSignUpDTO>> getPendingSignUps(String login) {
         List<ResponseSignUpDTO> list = new ArrayList<>();
-        signUpService.getInstitutionPendingSignUps(id).forEach(item->list.add(item.toDTO()));
+        signUpService.getInstitutionPendingSignUps(login).forEach(item->list.add(item.toDTO()));
         return new ResponseEntity<>(list,HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<List<ResponseSignUpDTO>> getSignUpsArchive(Integer id) {
+    public ResponseEntity<List<ResponseSignUpDTO>> getSignUpsArchive(String login) {
         List<ResponseSignUpDTO> list = new ArrayList<>();
-        signUpService.getInstitutionSignUpsArchive(id).forEach(item->list.add(item.toDTO()));
+        signUpService.getInstitutionSignUpsArchive(login).forEach(item->list.add(item.toDTO()));
         return new ResponseEntity<>(list,HttpStatus.OK);
     }
 
