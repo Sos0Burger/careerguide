@@ -15,7 +15,6 @@ public interface UserApi {
     @Operation(summary = "Авторизация")
     ResponseEntity<ResponseUserDTO> authenticateUser(@RequestBody LoginDTO loginDto);
     @PostMapping("/signup")
-
     @Operation(summary = "Создание пользователя")
     ResponseEntity<?> registerUser(@RequestBody RegDTO RegDTO);
 }
