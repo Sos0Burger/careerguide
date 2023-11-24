@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 @RestController
 public class FileController implements FileApi {
@@ -35,10 +37,11 @@ public class FileController implements FileApi {
     @Override
     public ResponseEntity<byte[]> getFile(Integer id) {
         FileDAO file = fileService.get(id);
+        String fileName = URLEncoder.encode(file.getName(), StandardCharsets.UTF_8);
         return ResponseEntity.ok()
                 .header(
                         HttpHeaders.CONTENT_DISPOSITION,
-                        "attachment; filename=\"" + file.getName() + "\""
+                        "attachment; filename=\"" + fileName + "\""
                 )
                 .body(file.getData());
     }
