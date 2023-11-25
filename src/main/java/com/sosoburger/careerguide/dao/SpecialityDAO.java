@@ -9,7 +9,7 @@ import lombok.Setter;
 import org.modelmapper.ModelMapper;
 
 @Entity
-@Table(name = "specialities")
+@Table(name = "specialities", uniqueConstraints=@UniqueConstraint(columnNames={"name"}))
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,7 +20,7 @@ public class SpecialityDAO {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer signUpId;
+    private Integer id;
 
     @Column(name = "name")
     private String name;

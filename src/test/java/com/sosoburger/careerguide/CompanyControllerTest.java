@@ -31,8 +31,7 @@ class CompanyControllerTest {
     @Test
     @SqlGroup({
             @Sql(value = "classpath:reset.sql", executionPhase = BEFORE_TEST_METHOD),
-            @Sql(value = "classpath:data.sql", executionPhase = BEFORE_TEST_METHOD),
-            @Sql(value = "classpath:reset.sql", executionPhase = BEFORE_TEST_METHOD)
+            @Sql(value = "classpath:data.sql", executionPhase = BEFORE_TEST_METHOD)
     })
     @WithMockUser(username = "company", password = "company", roles = "COMPANY")
     void createCompany() {
