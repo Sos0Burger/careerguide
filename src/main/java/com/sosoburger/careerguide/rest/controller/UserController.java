@@ -63,6 +63,6 @@ public class UserController implements UserApi {
 
         userRepository.save(user);
 
-        return new ResponseEntity<>("Пользователь успешно зарегестрирован", HttpStatus.OK);
+        return new ResponseEntity<>("Пользователь успешно зарегестрирован", HttpStatus.CREATED);
     }
 }
