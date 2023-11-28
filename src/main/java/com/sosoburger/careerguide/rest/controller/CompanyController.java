@@ -61,14 +61,14 @@ public class CompanyController implements CompanyApi {
     @Override
     public ResponseEntity<List<ResponseSignUpDTO>> getPendingSignUps(Integer id) {
         List<ResponseSignUpDTO> list = new ArrayList<>();
-        signUpService.getCompanyPendingSignUps(id).forEach(item-> list.add(item.toDTO()));
+        signUpService.getCompanyPendingSignUps(id).forEach(item-> list.add(item.toDTO(true)));
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<List<ResponseSignUpDTO>> getSignUpsArchive(Integer id) {
         List<ResponseSignUpDTO> list = new ArrayList<>();
-        signUpService.getCompanySignUpsArchive(id).forEach(item-> list.add(item.toDTO()));
+        signUpService.getCompanySignUpsArchive(id).forEach(item-> list.add(item.toDTO(true)));
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 

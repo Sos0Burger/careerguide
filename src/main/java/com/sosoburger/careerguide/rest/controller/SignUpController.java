@@ -21,17 +21,17 @@ public class SignUpController implements SignUpApi {
 
     @Override
     public ResponseEntity<ResponseSignUpDTO> createSignUp(RequestSignUpDTO request) {
-        return new ResponseEntity<>(signUpService.save(request).toDTO(), HttpStatus.CREATED);
+        return new ResponseEntity<>(signUpService.save(request).toDTO(false), HttpStatus.CREATED);
     }
 
     @Override
     public ResponseEntity<ResponseSignUpDTO> updateSignUp(Integer id, RequestSignUpDTO request) {
-        return new ResponseEntity<>(signUpService.update(id, request).toDTO(), HttpStatus.OK);
+        return new ResponseEntity<>(signUpService.update(id, request).toDTO(false), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<ResponseSignUpDTO> getSignUp(Integer id) {
-        return new ResponseEntity<>(signUpService.get(id).toDTO(), HttpStatus.OK);
+        return new ResponseEntity<>(signUpService.get(id).toDTO(false), HttpStatus.OK);
     }
 
     @Override

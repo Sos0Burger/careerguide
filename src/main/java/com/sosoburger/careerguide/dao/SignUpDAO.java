@@ -61,7 +61,7 @@ public class SignUpDAO {
     @JoinColumn(name = "file_id")
     private FileDAO file;
 
-    public ResponseSignUpDTO toDTO() {
+    public ResponseSignUpDTO toDTO(boolean isCompany) {
         return new ResponseSignUpDTO(
                 signUpId,
                 name,
@@ -77,6 +77,8 @@ public class SignUpDAO {
                 file == null ?
                         null :
                         file.getId(),
+                isCompany ?
+                        institution.getImage() :
                 schedule.getCompany().getImage()
         );
     }

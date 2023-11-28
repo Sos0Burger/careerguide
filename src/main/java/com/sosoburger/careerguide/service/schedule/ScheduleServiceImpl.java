@@ -40,7 +40,7 @@ public class ScheduleServiceImpl implements ScheduleService{
 
     @Override
     public ScheduleDAO get(Integer id) {
-        String notFound = String.format("Расписание %d не найден.", id);
+        String notFound = String.format("Расписание %d не найдено.", id);
         if (scheduleRepository.findById(id).isEmpty()) {
             throw new NotFoundException(notFound);
         } else {
