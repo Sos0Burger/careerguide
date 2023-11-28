@@ -16,4 +16,11 @@ public class ResponseInstitutionDTO {
 
     private String image;
 
+    private String description;
+
+    private String email;
+
+    private String phone;
+
+    private String site;
 }

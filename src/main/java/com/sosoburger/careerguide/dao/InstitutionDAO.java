@@ -27,6 +27,18 @@ public class InstitutionDAO {
     @Column(name = "image")
     private String image;
 
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "site")
+    private String site;
+
     @OneToMany(mappedBy = "institution")
     private List<SignUpDAO> signUps;
 
@@ -37,7 +49,11 @@ public class InstitutionDAO {
         return new ResponseInstitutionDTO(
                 id,
                 name,
-                image
+                image,
+                description,
+                email,
+                phone,
+                site
         );
     }
 }

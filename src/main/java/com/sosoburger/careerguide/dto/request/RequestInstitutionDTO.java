@@ -19,6 +19,14 @@ public class RequestInstitutionDTO {
 
     private String image;
 
+    private String description;
+
+    private String email;
+
+    private String phone;
+
+    private String site;
+
     public InstitutionDAO toDAO() throws ParseException {
         ModelMapper modelMapper = new ModelMapper();
 
