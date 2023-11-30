@@ -81,6 +81,11 @@ public class CompanyController implements CompanyApi {
 
     @Override
     public ResponseEntity<ResponseCompanyDTO> getCompanyByLogin(String login) {
+        try{
         return new ResponseEntity<>(companyService.findByLogin(login).toDTO(), HttpStatus.OK);
+        }
+        catch (NullPointerException ex){
+            return new ResponseEntity<>(null, HttpStatus.OK);
+        }
     }
 }

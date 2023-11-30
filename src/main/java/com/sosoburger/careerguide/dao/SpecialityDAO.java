@@ -28,6 +28,9 @@ public class SpecialityDAO {
     @Column(name = "type")
     private String type;
 
+    @Column(name = "institution")
+    private String institution;
+
     public ResponseSpecialityDTO toDTO(){
         return modelMapper.map(this, ResponseSpecialityDTO.class);
     }
