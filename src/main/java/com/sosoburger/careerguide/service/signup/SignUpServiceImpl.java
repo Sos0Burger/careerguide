@@ -100,7 +100,7 @@ public class SignUpServiceImpl implements SignUpService {
     public void changeStatus(Integer id, Boolean status) {
         SignUpDAO signUpDAO = get(id);
         signUpDAO.setStatus(status);
-        if (status) {
+        if (status && signUpDAO.getFile()!=null) {
             MimeMessagePreparator preparator = message -> {
                 message.setFrom("nik.isaev2004@mail.ru");
                 message.setRecipients(Message.RecipientType.TO, signUpDAO.getSchedule().getCompany().getEmail());
