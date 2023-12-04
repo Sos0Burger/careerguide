@@ -21,7 +21,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-@Sql(value = "classpath:data.sql")
 class CompanyControllerTest {
     @Autowired
     MockMvc mockMvc;
@@ -69,14 +68,26 @@ class CompanyControllerTest {
     }
 
     @Test
+    @SqlGroup({
+            @Sql(value = "classpath:reset.sql", executionPhase = BEFORE_TEST_METHOD),
+            @Sql(value = "classpath:data.sql", executionPhase = BEFORE_TEST_METHOD)
+    })
     void updateCompany() {
     }
 
     @Test
+    @SqlGroup({
+            @Sql(value = "classpath:reset.sql", executionPhase = BEFORE_TEST_METHOD),
+            @Sql(value = "classpath:data.sql", executionPhase = BEFORE_TEST_METHOD)
+    })
     void getCompany() {
     }
 
     @Test
+    @SqlGroup({
+            @Sql(value = "classpath:reset.sql", executionPhase = BEFORE_TEST_METHOD),
+            @Sql(value = "classpath:data.sql", executionPhase = BEFORE_TEST_METHOD)
+    })
     void delete() {
     }
 }
